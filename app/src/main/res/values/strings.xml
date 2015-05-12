@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Censor News Reader</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="empty">No data</string>
+    <string name="loading">"Loading news..."</string>
+</resources>

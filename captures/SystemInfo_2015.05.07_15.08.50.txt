@@ -1,0 +1,30 @@
+Activity Resolver Table:
+  Non-Data Actions:
+      android.intent.action.MAIN:
+        537d0434 com.example.sck.censornewsreader/.MainActivity filter 537d04c4
+ 
+Packages:
+  Package [com.example.sck.censornewsreader] (5351b480):
+    userId=10054 gids=[3003]
+    sharedUser=null
+    pkg=Package{536ec558 com.example.sck.censornewsreader}
+    codePath=/data/app/com.example.sck.censornewsreader-1.apk
+    resourcePath=/data/app/com.example.sck.censornewsreader-1.apk
+    nativeLibraryPath=/data/app-lib/com.example.sck.censornewsreader-1
+    versionCode=1
+    applicationInfo=ApplicationInfo{536ec5a4 com.example.sck.censornewsreader}
+    flags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    versionName=1.0
+    dataDir=/data/data/com.example.sck.censornewsreader
+    targetSdk=22
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    timeStamp=2015-05-07 11:45:16
+    firstInstallTime=2015-04-17 11:37:01
+    lastUpdateTime=2015-05-07 11:45:16
+    signatures=PackageSignatures{534e072c [5351b590]}
+    permissionsFixed=true haveGids=true installStatus=1
+    pkgFlags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    User 0:  installed=true stopped=false notLaunched=false enabled=0
+    grantedPermissions:
+      android.permission.ACCESS_NETWORK_STATE
+      android.permission.INTERNET
