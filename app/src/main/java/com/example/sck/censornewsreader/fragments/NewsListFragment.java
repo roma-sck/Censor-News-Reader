@@ -28,6 +28,7 @@ import de.greenrobot.event.EventBus;
 
 public class NewsListFragment extends ListFragment {
 
+    private static boolean flag_dbsave;
     public static final int REFRESH_DELAY = 2000;
     private PullToRefreshView mPullToRefreshView;
     private NewsDataSource datasource;
@@ -36,6 +37,7 @@ public class NewsListFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        flag_dbsave = true;
 
         EventBus.getDefault().register(this);
 
@@ -121,18 +123,22 @@ public class NewsListFragment extends ListFragment {
     }
 
     private class DBsave extends AsyncTask<Void, Void, Void> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
         @Override
         protected Void doInBackground(Void... params) {
-            datasource.addNewsToDB(newsList);
+            if(flag_dbsave == true) {
+                datasource.addNewsToDB(newsList);
+            }
             return null;
         }
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
+            flag_dbsave = false;
         }
     }
 

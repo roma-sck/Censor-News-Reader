@@ -5,9 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.example.sck.censornewsreader.R;
+import com.example.sck.censornewsreader.fragments.NewsListFragment;
 import com.example.sck.censornewsreader.models.Collection1;
 
 import java.io.BufferedReader;
@@ -39,13 +39,12 @@ public class NewsDataSource {
 
         if(newsList != null) {
             for (int i = 0; i < newsList.size(); i++) {
-                Collection1 item = newsList.get(i);
-                String title = item.getTitle().getText();
-                String date = item.getDate().get(0).getText() + " " + item.getDate().get(1).getText();
-                String link = item.getTitle().getHref();
+                String title = newsList.get(i).getTitle().getText();
+                String date = newsList.get(i).getDate().get(0).getText() + " " + newsList.get(i).getDate().get(1).getText();
+                String link = newsList.get(i).getTitle().getHref();
                 String saved_url = urlToString(link);
                 String dafault_image = "android.resource://com.example.sck.censornewsreader/" + R.drawable.img_place;
-                String img_link = item.getImage().getSrc();
+                String img_link = newsList.get(i).getImage().getSrc();
 
                 addNewsItem(title, date, link, saved_url, dafault_image, img_link);
             }
@@ -81,6 +80,7 @@ public class NewsDataSource {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return sb.toString();
     }
 
