@@ -7,7 +7,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.sck.censornewsreader.R;
-import com.example.sck.censornewsreader.fragments.NewsListFragment;
 import com.example.sck.censornewsreader.models.Collection1;
 
 import java.io.BufferedReader;
@@ -19,31 +18,36 @@ import java.util.List;
 
 public class NewsDataSource {
 
-    private SQLiteDatabase database;
-    private static NewsDBHelper dbHelper;
+    private SQLiteDatabase mDatabase;
+    private NewsDBHelper mDbHelper;
 
     public NewsDataSource(Context context) {
-            dbHelper = new NewsDBHelper(context);
+            mDbHelper = new NewsDBHelper(context);
     }
 
     public void open() throws SQLException {
-        database = dbHelper.getWritableDatabase();
+        mDatabase = mDbHelper.getWritableDatabase();
     }
 
     public void close() {
-        if (dbHelper != null) dbHelper.close();
+        if (mDbHelper != null) mDbHelper.close();
     }
 
+    /**
+     * add updated all news
+     *
+     * @param newsList
+     */
     public void addNewsToDB(List<Collection1> newsList) {
         delAllData();
 
         if(newsList != null) {
+            String dafault_image = "android.resource://com.example.sck.censornewsreader/" + R.drawable.img_place;
             for (int i = 0; i < newsList.size(); i++) {
                 String title = newsList.get(i).getTitle().getText();
                 String date = newsList.get(i).getDate().get(0).getText() + " " + newsList.get(i).getDate().get(1).getText();
                 String link = newsList.get(i).getTitle().getHref();
                 String saved_url = urlToString(link);
-                String dafault_image = "android.resource://com.example.sck.censornewsreader/" + R.drawable.img_place;
                 String img_link = newsList.get(i).getImage().getSrc();
 
                 addNewsItem(title, date, link, saved_url, dafault_image, img_link);
@@ -51,6 +55,16 @@ public class NewsDataSource {
         }
     }
 
+    /**
+     * add one news to DB
+     *
+     * @param title
+     * @param date
+     * @param link
+     * @param saved_url
+     * @param dafault_image
+     * @param img_link
+     */
     public void addNewsItem(String title, String date, String link, String saved_url, String dafault_image, String img_link) {
         ContentValues cv = new ContentValues();
         cv.put(NewsDBHelper.COLUMN_TITLE, title);
@@ -59,13 +73,18 @@ public class NewsDataSource {
         cv.put(NewsDBHelper.COLUMN_SAVEDURL, saved_url);
         cv.put(NewsDBHelper.COLUMN_DEFAULTIMAGE, dafault_image);
         cv.put(NewsDBHelper.COLUMN_IMAGELINK, img_link);
-        database.insert(NewsDBHelper.TABLE_NEWS, null, cv);
+        mDatabase.insert(NewsDBHelper.TABLE_NEWS, null, cv);
     }
 
-    protected String urlToString(String sURL) {
+    /**
+     * save html page to String for full autonomy in offline mode
+     *
+     * @param URL
+     */
+    protected String urlToString(String URL) {
         StringBuffer sb = null;
         try {
-            URL url = new URL(sURL);
+            URL url = new URL(URL);
             BufferedReader br = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
 
             int numCharsRead;
@@ -84,12 +103,20 @@ public class NewsDataSource {
         return sb.toString();
     }
 
+    /**
+     * clear DB
+     */
     public void delAllData() {
-        database.delete(NewsDBHelper.TABLE_NEWS, null, null);
+        mDatabase.delete(NewsDBHelper.TABLE_NEWS, null, null);
     }
 
+    /**
+     * get Cursor with all saved news from DB
+     *
+     * @return Cursor
+     */
     public Cursor getAllData() {
-        return database.query(NewsDBHelper.TABLE_NEWS, null, null, null, null, null, null);
+        return mDatabase.query(NewsDBHelper.TABLE_NEWS, null, null, null, null, null, null);
     }
 }
 

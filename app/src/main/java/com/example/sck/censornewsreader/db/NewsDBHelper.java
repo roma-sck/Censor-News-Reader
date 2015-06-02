@@ -3,7 +3,6 @@ package com.example.sck.censornewsreader.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class NewsDBHelper extends SQLiteOpenHelper {
 
@@ -19,7 +18,6 @@ public class NewsDBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "censor_news.db";
     private static final int DATABASE_VERSION = 1;
 
-    // Database creation sql statement
     private static final String DATABASE_CREATE = "create table " + TABLE_NEWS +
             "(" +
             COLUMN_ID + " integer primary key autoincrement, " +
@@ -38,7 +36,6 @@ public class NewsDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database) {
         database.execSQL(DATABASE_CREATE);
-        Log.d("CREATE TABLE", "Create Table Successfully.");
     }
 
     @Override

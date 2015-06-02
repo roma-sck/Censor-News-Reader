@@ -2,38 +2,38 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:minHeight="50dp"
+
     android:orientation="horizontal"
     android:background="?android:attr/activatedBackgroundIndicator">
 
     <ImageView
         android:id="@+id/newsImage"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_alignParentLeft="true"
+        android:layout_width="@dimen/list_img_width"
+        android:layout_height="@dimen/list_img_height"
         android:layout_centerVertical="true"/>
 
     <TextView
         android:id="@+id/newsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/newsImage"
-        android:lineSpacingExtra="3dp"
-        android:paddingLeft="5dp"
-        android:paddingTop="5dp"
+        android:layout_marginLeft="@dimen/list_text_marginLeft"
+        android:lineSpacingExtra="@dimen/list_text_lineSpacingExtra"
+        android:paddingTop="@dimen/list_text_paddingTop"
         android:text=""
         android:typeface="normal"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/base_text_color"
+        android:gravity="start" />
 
     <TextView
         android:id="@+id/newsDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/newsTitle"
-        android:layout_toRightOf="@id/newsImage"
-        android:paddingLeft="5dp"
-        android:paddingTop="5dp"
+        android:layout_marginLeft="@dimen/list_text_marginLeft"
+        android:paddingTop="@dimen/list_text_paddingTop"
         android:text=""
-        android:textSize="12sp" />
+        android:textColor="@color/base_text_color"
+        android:textSize="@dimen/list_dateTextSize" />
 
 </RelativeLayout>

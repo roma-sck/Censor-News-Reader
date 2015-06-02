@@ -14,27 +14,26 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-// adapter for show news list items
 public class NewsListAdapter extends BaseAdapter {
 
-    private Context myContext;
-    private List<Collection1> listData;
+    private Context mContext;
+    private List<Collection1> mListData;
     private LayoutInflater inflater;
 
-    public NewsListAdapter(Context context, List<Collection1> listData) {
-        this.listData = listData;
+    public NewsListAdapter(Context context, List<Collection1> mListData) {
+        this.mListData = mListData;
         inflater = LayoutInflater.from(context);
-        myContext = context;
+        mContext = context;
     }
 
     @Override
     public int getCount() {
-        return listData.size();
+        return mListData.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return listData.get(position);
+        return mListData.get(position);
     }
 
     @Override
@@ -55,13 +54,13 @@ public class NewsListAdapter extends BaseAdapter {
             news = (NewsItem) view.getTag();
         }
 
-        Collection1 item = listData.get(position);
+        Collection1 item = mListData.get(position);
 
         news.newsTitle.setText(item.getTitle().getText());
         news.newsDate.setText(item.getDate().get(0).getText() + " " + item.getDate().get(1).getText());
 
         if ( item.getImage().getSrc().length() > 1) {
-            Picasso.with(myContext).load(item.getImage().getSrc()).into(news.newsImage);
+            Picasso.with(mContext).load(item.getImage().getSrc()).into(news.newsImage);
         } else {
             news.newsImage.setImageResource(R.drawable.img_place);
         }

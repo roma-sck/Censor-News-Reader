@@ -12,8 +12,8 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-import com.example.sck.censornewsreader.api_request.CensorNewsClient;
-import com.example.sck.censornewsreader.DetailsNewsActivity;
+import com.example.sck.censornewsreader.api.ApiRequest;
+import com.example.sck.censornewsreader.activity.DetailsNewsActivity;
 import com.example.sck.censornewsreader.adapter.NewsListAdapter;
 import com.example.sck.censornewsreader.R;
 import com.example.sck.censornewsreader.db.NewsDBHelper;
@@ -28,38 +28,39 @@ import de.greenrobot.event.EventBus;
 
 public class NewsListFragment extends ListFragment {
 
-    private static boolean flag_dbsave;
+    private static boolean sFlagDbSave;
     public static final int REFRESH_DELAY = 2000;
     private PullToRefreshView mPullToRefreshView;
-    private NewsDataSource datasource;
+    private NewsDataSource mDatasource;
     private List<Collection1> newsList;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        flag_dbsave = true;
+        sFlagDbSave = true;
 
         EventBus.getDefault().register(this);
 
         ititPullToRefresh();
 
-        datasource = new NewsDataSource(getActivity());
-        datasource.open();
+        mDatasource = new NewsDataSource(getActivity());
+        mDatasource.open();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // inflate layout for this fragment
         return inflater.inflate(R.layout.listnews_fragment, container, false);
     }
 
+    /**
+     * pull-to-refresh ( yalantis.phoenix )
+     */
     private void ititPullToRefresh() {
-        // pull-to-refresh ( yalantis.phoenix )
         mPullToRefreshView = (PullToRefreshView) getView().findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                CensorNewsClient.getClient().updateNews();
+                ApiRequest.updateNews();
                 mPullToRefreshView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -69,9 +70,12 @@ public class NewsListFragment extends ListFragment {
         });
     }
 
-    // update newsList
+    /**
+     * update newsList
+     *
+     * @param allnews
+     */
     public void onEvent(Example allnews) {
-        // hide mPullToRefreshView; get newsList; set view adapter
         mPullToRefreshView.setRefreshing(false);
         newsList = allnews.getResults().getCollection1();
         ListView newsListView = (ListView) getView().findViewById(android.R.id.list);
@@ -80,11 +84,15 @@ public class NewsListFragment extends ListFragment {
         new DBsave().execute();
     }
 
-    // display retrofit error
+    /**
+     * display retrofit error, update newsList from DB
+     *
+     * @param msg
+     */
     public void onEvent(String msg) {
         mPullToRefreshView.setRefreshing(false);
         Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
-        // load data from DB nad show in newsListView
+
         Cursor cursor = loadFromBD();
         String[] from = new String[]{NewsDBHelper.COLUMN_TITLE, NewsDBHelper.COLUMN_DATE, NewsDBHelper.COLUMN_DEFAULTIMAGE};
         int[] to = new int[]{R.id.newsTitle, R.id.newsDate, R.id.newsImage};
@@ -96,30 +104,27 @@ public class NewsListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int pos, long id) {
         String selectedNewsLink;
         if (newsList != null) {
-            // get url selected news
             selectedNewsLink = newsList.get(pos).getTitle().getHref();
         } else {
             // get saved_url selected news from db
             Cursor cursor = (Cursor) l.getItemAtPosition(pos);
             selectedNewsLink = cursor.getString(cursor.getColumnIndexOrThrow(NewsDBHelper.COLUMN_SAVEDURL));
         }
-        // submit url in second activity through intent
         Intent intent = new Intent(getActivity(), DetailsNewsActivity.class);
         intent.putExtra("url", selectedNewsLink);
-        // start new activity
         startActivity(intent);
     }
 
     @Override
     public void onDestroyView() {
         EventBus.getDefault().unregister(this);
-        datasource.close();
+        mDatasource.close();
         super.onDestroyView();
     }
 
     protected Cursor loadFromBD() {
-        Toast.makeText(getActivity(), "Data downloaded from DB", Toast.LENGTH_LONG).show();
-        return datasource.getAllData();
+        Toast.makeText(getActivity(), R.string.dwnld_from_db, Toast.LENGTH_LONG).show();
+        return mDatasource.getAllData();
     }
 
     private class DBsave extends AsyncTask<Void, Void, Void> {
@@ -130,15 +135,15 @@ public class NewsListFragment extends ListFragment {
         }
         @Override
         protected Void doInBackground(Void... params) {
-            if(flag_dbsave == true) {
-                datasource.addNewsToDB(newsList);
+            if(sFlagDbSave == true) {
+                mDatasource.addNewsToDB(newsList);
             }
             return null;
         }
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            flag_dbsave = false;
+            sFlagDbSave = false;
         }
     }
 
