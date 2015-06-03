@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.sck.censornewsreader.App;
 import com.example.sck.censornewsreader.R;
 import com.example.sck.censornewsreader.fragments.WebViewFragment;
 
@@ -31,7 +32,7 @@ public class DetailsNewsActivity extends Activity {
             fragmentTransaction.add(android.R.id.content, wvf, url);
             fragmentTransaction.commit();
         } else {
-            Toast.makeText(this, R.string.url_null, Toast.LENGTH_LONG).show();
+            Toast.makeText(App.getContext(), R.string.url_null, Toast.LENGTH_LONG).show();
         }
     }
 }

@@ -130,10 +130,6 @@ public class NewsListFragment extends ListFragment {
     private class DBsave extends AsyncTask<Void, Void, Void> {
 
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-        @Override
         protected Void doInBackground(Void... params) {
             if(sFlagDbSave == true) {
                 mDatasource.addNewsToDB(newsList);
