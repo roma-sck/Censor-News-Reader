@@ -55,7 +55,7 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_ABOUT_ID:
-                Toast.makeText(App.getContext(), "by roma.sck@gmail.com", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "by roma.sck@gmail.com", Toast.LENGTH_LONG).show();
                 break;
             case MENU_QUIT_ID:
                 finish();
