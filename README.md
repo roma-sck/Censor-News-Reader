@@ -2,7 +2,7 @@
 A news feed for http://censor.net.ua/    ( json api)
 
 There is two screens
-1) a list of news (with pull-to-refresh) 
+1) a list of news (with pull-to-refresh)
 2) detailed info news (webView)
 
 Requests done with the help of library Retrofit
