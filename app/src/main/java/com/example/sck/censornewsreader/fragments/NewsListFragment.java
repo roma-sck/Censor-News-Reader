@@ -3,7 +3,6 @@ package com.example.sck.censornewsreader.fragments;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import com.example.sck.censornewsreader.db.DbSaveService;
 import com.example.sck.censornewsreader.api.ApiRequest;
 import com.example.sck.censornewsreader.activity.DetailsNewsActivity;
 import com.example.sck.censornewsreader.adapter.NewsListAdapter;
@@ -28,16 +28,25 @@ import de.greenrobot.event.EventBus;
 
 public class NewsListFragment extends ListFragment {
 
-    private static boolean sFlagDbSave;
+    private static final String TAG = NewsListFragment.class.getSimpleName();
     public static final int REFRESH_DELAY = 2000;
+
     private PullToRefreshView mPullToRefreshView;
     private NewsDataSource mDatasource;
-    private List<Collection1> newsList;
+    private List<Collection1> mNewsList;
+    private ListView mNewsListView;
+
+    public static NewsListFragment newInstance() {
+        return new NewsListFragment();
+    }
+
+    public static String getFragmentTag() {
+        return TAG;
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        sFlagDbSave = true;
 
         EventBus.getDefault().register(this);
 
@@ -49,7 +58,9 @@ public class NewsListFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.listnews_fragment, container, false);
+        View view =  inflater.inflate(R.layout.listnews_fragment, container, false);
+        mNewsListView = (ListView) view.findViewById(android.R.id.list);
+        return view;
     }
 
     /**
@@ -71,21 +82,21 @@ public class NewsListFragment extends ListFragment {
     }
 
     /**
-     * update newsList
+     * update mNewsList, save updated news to DB
      *
      * @param allnews
      */
     public void onEvent(Example allnews) {
         mPullToRefreshView.setRefreshing(false);
-        newsList = allnews.getResults().getCollection1();
-        ListView newsListView = (ListView) getView().findViewById(android.R.id.list);
-        newsListView.setAdapter(new NewsListAdapter(getActivity(), newsList));
-        // add data to DB in async task
-        new DBsave().execute();
+        mNewsList = allnews.getResults().getCollection1();
+        mNewsListView.setAdapter(new NewsListAdapter(getActivity(), mNewsList));
+        // news saving process in IntentService
+        DbSaveService.setNewsList(mNewsList);
+        getActivity().startService(new Intent(getActivity(), DbSaveService.class));
     }
 
     /**
-     * display retrofit error, update newsList from DB
+     * display retrofit error, update mNewsList from DB
      *
      * @param msg
      */
@@ -93,20 +104,24 @@ public class NewsListFragment extends ListFragment {
         mPullToRefreshView.setRefreshing(false);
         Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
 
-        Cursor cursor = loadFromBD();
+        Cursor cursor = loadFromDB();
         String[] from = new String[]{NewsDBHelper.COLUMN_TITLE, NewsDBHelper.COLUMN_DATE, NewsDBHelper.COLUMN_DEFAULTIMAGE};
         int[] to = new int[]{R.id.newsTitle, R.id.newsDate, R.id.newsImage};
-        ListView newsListView = (ListView) getView().findViewById(android.R.id.list);
-        newsListView.setAdapter(new SimpleCursorAdapter(getActivity(), R.layout.list_item, cursor, from, to, 0));
+        mNewsListView.setAdapter(new SimpleCursorAdapter(getActivity(), R.layout.list_item, cursor, from, to, 0));
+    }
+
+    protected Cursor loadFromDB() {
+        Toast.makeText(getActivity(), R.string.dwnld_from_db, Toast.LENGTH_LONG).show();
+        return mDatasource.getAllData();
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int pos, long id) {
         String selectedNewsLink;
-        if (newsList != null) {
-            selectedNewsLink = newsList.get(pos).getTitle().getHref();
+        if (mNewsList != null) {
+            selectedNewsLink = mNewsList.get(pos).getTitle().getHref();
         } else {
-            // get saved_url selected news from db
+            // get saved_url of selected news from db
             Cursor cursor = (Cursor) l.getItemAtPosition(pos);
             selectedNewsLink = cursor.getString(cursor.getColumnIndexOrThrow(NewsDBHelper.COLUMN_SAVEDURL));
         }
@@ -121,26 +136,4 @@ public class NewsListFragment extends ListFragment {
         mDatasource.close();
         super.onDestroyView();
     }
-
-    protected Cursor loadFromBD() {
-        Toast.makeText(getActivity(), R.string.dwnld_from_db, Toast.LENGTH_LONG).show();
-        return mDatasource.getAllData();
-    }
-
-    private class DBsave extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            if(sFlagDbSave == true) {
-                mDatasource.addNewsToDB(newsList);
-            }
-            return null;
-        }
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            sFlagDbSave = false;
-        }
-    }
-
 }

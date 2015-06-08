@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.sck.censornewsreader.App;
 import com.example.sck.censornewsreader.R;
 import com.example.sck.censornewsreader.api.ApiRequest;
 import com.example.sck.censornewsreader.fragments.NewsListFragment;
@@ -17,8 +16,6 @@ public class MainActivity extends ActionBarActivity {
 
     private final int MENU_ABOUT_ID = 1;
     private final int MENU_QUIT_ID = 2;
-
-    private static final String TAG = "NewsListFragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +32,12 @@ public class MainActivity extends ActionBarActivity {
      */
     protected void addFragment() {
         FragmentManager fragmentManager = getFragmentManager();
-        NewsListFragment newsListFragment = (NewsListFragment) fragmentManager.findFragmentByTag(TAG);
-        if (newsListFragment == null) {
-            newsListFragment = new NewsListFragment();
+        NewsListFragment mListFragment = (NewsListFragment) fragmentManager.findFragmentByTag(NewsListFragment.getFragmentTag());
+        if (mListFragment == null) {
+            mListFragment = NewsListFragment.newInstance();
         }
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(android.R.id.content, newsListFragment);
+        fragmentTransaction.attach(mListFragment);
         fragmentTransaction.commit();
     }
 
