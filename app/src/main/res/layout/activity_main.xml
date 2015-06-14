@@ -3,15 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainLayout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    style="@style/LinearLayout">
 
     <fragment
         android:name="com.example.sck.censornewsreader.fragments.NewsListFragment"
         android:id="@+id/newslist_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout="@layout/listnews_fragment"/>
+        tools:layout="@layout/listnews_fragment"
+        style="@style/Fragment"/>
 
 </LinearLayout>

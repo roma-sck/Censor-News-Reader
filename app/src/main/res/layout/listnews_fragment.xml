@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <com.yalantis.phoenix.PullToRefreshView
-        android:id="@+id/pull_to_refresh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    <ListView
-        android:id="@id/android:list"
-        android:cacheColorHint="@color/transparent_color"
-        android:dividerHeight="@dimen/list_dividerHeight"
-        android:background="@color/base_bg_color"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </ListView>
-    </com.yalantis.phoenix.PullToRefreshView>
+    style="@style/LinearLayout">
 
     <TextView
         android:id="@id/android:empty"
@@ -28,4 +12,21 @@
         android:layout_gravity="center">
     </TextView>
 
+    <com.yalantis.phoenix.PullToRefreshView
+        android:id="@+id/pull_to_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <ListView
+        android:id="@id/android:list"
+        style="@style/ListView">
+    </ListView>
+    </com.yalantis.phoenix.PullToRefreshView>
+
 </LinearLayout>
+
+
+    <!--android:cacheColorHint="@color/transparent_color"-->
+    <!--android:dividerHeight="@dimen/list_dividerHeight"-->
+    <!--android:background="@color/base_bg_color"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->

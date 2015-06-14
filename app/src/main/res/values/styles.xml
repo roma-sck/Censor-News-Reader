@@ -5,4 +5,61 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Fragment">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="LinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="ListView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:cacheColorHint">@color/transparent_color</item>
+        <item name="android:background">@color/base_bg_color</item>
+        <item name="android:dividerHeight">@dimen/list_dividerHeight</item>
+    </style>
+
+    <style name="ImageView">
+        <item name="android:layout_width">@dimen/list_img_width</item>
+        <item name="android:layout_height">@dimen/list_img_height</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ListTitleText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/list_text_marginLeft</item>
+        <item name="android:lineSpacingExtra">@dimen/list_text_lineSpacingExtra</item>
+        <item name="android:paddingTop">@dimen/list_text_paddingTop</item>
+        <item name="android:text"> </item>
+        <item name="android:typeface">normal</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/base_text_color</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="ListDateText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/newsTitle</item>
+        <item name="android:layout_marginLeft">@dimen/list_text_marginLeft</item>
+        <item name="android:paddingTop">@dimen/list_text_paddingTop</item>
+        <item name="android:text"> </item>
+        <item name="android:textColor">@color/base_text_color</item>
+        <item name="android:textSize">@dimen/list_dateTextSize</item>
+    </style>
+
+    <style name="RelativeLayout">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">?android:attr/activatedBackgroundIndicator</item>
+    </style>
+
 </resources>
