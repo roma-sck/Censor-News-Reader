@@ -14,9 +14,6 @@ import com.example.sck.censornewsreader.fragments.NewsListFragment;
 
 public class MainActivity extends ActionBarActivity {
 
-    private final int MENU_ABOUT_ID = 1;
-    private final int MENU_QUIT_ID = 2;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,18 +40,17 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_ABOUT_ID, 0, R.string.menu_about);
-        menu.add(0, MENU_QUIT_ID, 0, R.string.menu_exit);
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case MENU_ABOUT_ID:
+            case R.id.action_about:
                 Toast.makeText(getApplicationContext(), "by roma.sck@gmail.com", Toast.LENGTH_LONG).show();
                 break;
-            case MENU_QUIT_ID:
+            case R.id.action_exit:
                 finish();
                 break;
         }
