@@ -7,4 +7,7 @@
     <string name="menu_exit">"Quit"</string>
     <string name="url_null">"Url is null"</string>
     <string name="dwnld_from_db">"Data downloaded from DB"</string>
+    <string name="dialogTitleAbout">"Author: roma.sck@gmail.com"</string>
+    <string name="dialogMsgAbout">A simple news feed for \n  http://censor.net.ua \n"</string>
+
 </resources>

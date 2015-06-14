@@ -1,5 +1,6 @@
 package com.example.sck.censornewsreader.activity;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
@@ -48,12 +49,20 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_about:
-                Toast.makeText(getApplicationContext(), "by roma.sck@gmail.com", Toast.LENGTH_LONG).show();
+                createAboutDialog();
                 break;
             case R.id.action_exit:
                 finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void createAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.dialogTitleAbout);
+        builder.setMessage(R.string.dialogMsgAbout);
+        AlertDialog ad = builder.create();
+        ad.show();
     }
 }
