@@ -23,10 +23,3 @@
     </com.yalantis.phoenix.PullToRefreshView>
 
 </LinearLayout>
-
-
-    <!--android:cacheColorHint="@color/transparent_color"-->
-    <!--android:dividerHeight="@dimen/list_dividerHeight"-->
-    <!--android:background="@color/base_bg_color"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->

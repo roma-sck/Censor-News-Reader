@@ -4,6 +4,7 @@ import android.app.ListFragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,21 +29,12 @@ import de.greenrobot.event.EventBus;
 
 public class NewsListFragment extends ListFragment {
 
-    private static final String TAG = NewsListFragment.class.getSimpleName();
-    public static final int REFRESH_DELAY = 2000;
+    public static final int REFRESH_DELAY = 0;
 
     private PullToRefreshView mPullToRefreshView;
     private NewsDataSource mDatasource;
     private List<Collection1> mNewsList;
     private ListView mNewsListView;
-
-    public static NewsListFragment newInstance() {
-        return new NewsListFragment();
-    }
-
-    public static String getFragmentTag() {
-        return TAG;
-    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -57,7 +49,7 @@ public class NewsListFragment extends ListFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.listnews_fragment, container, false);
         mNewsListView = (ListView) view.findViewById(android.R.id.list);
         return view;
@@ -67,7 +59,7 @@ public class NewsListFragment extends ListFragment {
      * pull-to-refresh ( yalantis.phoenix )
      */
     private void ititPullToRefresh() {
-        mPullToRefreshView = (PullToRefreshView) getView().findViewById(R.id.pull_to_refresh);
+        mPullToRefreshView = (PullToRefreshView) getActivity().findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
