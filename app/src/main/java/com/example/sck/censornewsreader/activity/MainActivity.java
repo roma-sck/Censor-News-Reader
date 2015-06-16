@@ -3,6 +3,7 @@ package com.example.sck.censornewsreader.activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -48,6 +49,9 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_email:
+                createSendMailIntent();
+                break;
             case R.id.action_about:
                 createAboutDialog();
                 break;
@@ -56,6 +60,15 @@ public class MainActivity extends ActionBarActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void createSendMailIntent() {
+        Intent mailIntent = new Intent(Intent.ACTION_SEND);
+        mailIntent.setType("message/rfc822");
+        mailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] { "roma.sck@gmail.com" });
+        mailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Censor News Reader report: ");
+        mailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "\n I like your app.");
+        startActivity(Intent.createChooser(mailIntent, "Send via:"));
     }
 
     private void createAboutDialog() {
