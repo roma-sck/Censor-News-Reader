@@ -11,5 +11,5 @@ import com.example.sck.censornewsreader.models.Example;
 public interface CensorApi {
 
     @GET( Constants.API_PREFIX + Constants.API_KEY )
-    public void newsArhive(Callback<Example> callback);
+    void newsArchive(Callback<Example> callback);
 }

@@ -12,7 +12,6 @@ import com.example.sck.censornewsreader.models.Collection1;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class NewsDataSource {
     /**
      * add updated all news
      *
-     * @param newsList
+     * @param newsList Updated News List
      */
     public void addNewsToDB(List<Collection1> newsList) {
         delAllData();
@@ -58,12 +57,12 @@ public class NewsDataSource {
     /**
      * add one news to DB
      *
-     * @param title
-     * @param date
-     * @param link
-     * @param saved_url
-     * @param dafault_image
-     * @param img_link
+     * @param title News Title
+     * @param date News added date and time
+     * @param link News link
+     * @param saved_url News saved to string detail
+     * @param dafault_image Image from resourses (logo)
+     * @param img_link Link to image (if has)
      */
     public void addNewsItem(String title, String date, String link, String saved_url, String dafault_image, String img_link) {
         ContentValues cv = new ContentValues();
@@ -79,12 +78,13 @@ public class NewsDataSource {
     /**
      * save html page to String for full autonomy in offline mode
      *
-     * @param URL
+     * @param link News link
      */
-    protected String urlToString(String URL) {
-        StringBuffer sb = null;
+    protected String urlToString(String link) {
+        StringBuffer sb;
+        String savedPage = null;
         try {
-            URL url = new URL(URL);
+            URL url = new URL(link);
             BufferedReader br = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
 
             int numCharsRead;
@@ -94,13 +94,11 @@ public class NewsDataSource {
                 sb.append(charArray, 0, numCharsRead);
             }
             br.close();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+            savedPage = sb.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return sb.toString();
+        return savedPage;
     }
 
     /**
@@ -113,7 +111,7 @@ public class NewsDataSource {
     /**
      * get Cursor with all saved news from DB
      *
-     * @return Cursor
+     * @return Cursor with all data
      */
     public Cursor getAllData() {
         return mDatabase.query(NewsDBHelper.TABLE_NEWS, null, null, null, null, null, null);

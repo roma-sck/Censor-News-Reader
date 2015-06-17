@@ -13,34 +13,29 @@ import com.example.sck.censornewsreader.R;
 public class WebViewFragment extends Fragment {
 
     private String mCurrentURL;
-    private WebView wv;
+    private static final String WEBVIEW_MIME = "text/html";
+    private static final String WEBVIEW_ENCODING = "UTF-8";
 
     /**
      * get url from DetailsNewsActivity
      *
-     * @param url
+     * @param url Selected news link
      */
     public void init(String url) {
         mCurrentURL = url;
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View v = inflater.inflate(R.layout.web_fragment, container, false);
         if (mCurrentURL != null) {
-            wv = (WebView) v.findViewById(R.id.webPage);
+            WebView wv = (WebView) v.findViewById(R.id.webPage);
             wv.getSettings().setJavaScriptEnabled(true);
             wv.setWebViewClient(new MyWebClient());
             if( !mCurrentURL.contains("<")) {
                 wv.loadUrl(mCurrentURL);
             } else {
-                wv.loadDataWithBaseURL("", mCurrentURL, "text/html", "UTF-8", "");
+                wv.loadDataWithBaseURL("", mCurrentURL, WEBVIEW_MIME, WEBVIEW_ENCODING, "");
             }
         }
         return v;
@@ -50,8 +45,8 @@ public class WebViewFragment extends Fragment {
         /**
          * goes to news url
          *
-         * @param view
-         * @param url
+         * @param view WebView
+         * @param url News link
          * @return  return true means the host application handles the url, while return false means the current WebView handles the url.
          */
         @Override

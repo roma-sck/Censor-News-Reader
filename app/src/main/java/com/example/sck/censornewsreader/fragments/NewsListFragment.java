@@ -29,8 +29,6 @@ import de.greenrobot.event.EventBus;
 
 public class NewsListFragment extends ListFragment {
 
-    public static final int REFRESH_DELAY = 0;
-
     private PullToRefreshView mPullToRefreshView;
     private NewsDataSource mDatasource;
     private List<Collection1> mNewsList;
@@ -68,7 +66,7 @@ public class NewsListFragment extends ListFragment {
                     @Override
                     public void run() {
                     }
-                }, REFRESH_DELAY);
+                }, 0);
             }
         });
     }
@@ -90,7 +88,7 @@ public class NewsListFragment extends ListFragment {
     /**
      * display retrofit error, update mNewsList from DB
      *
-     * @param msg
+     * @param msg Retrofit error message
      */
     public void onEvent(String msg) {
         mPullToRefreshView.setRefreshing(false);
