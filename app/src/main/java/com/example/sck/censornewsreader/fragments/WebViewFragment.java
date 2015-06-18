@@ -12,6 +12,7 @@ import com.example.sck.censornewsreader.R;
 
 public class WebViewFragment extends Fragment {
 
+    private WebView mWebView;
     private String mCurrentURL;
     private static final String WEBVIEW_MIME = "text/html";
     private static final String WEBVIEW_ENCODING = "UTF-8";
@@ -27,15 +28,18 @@ public class WebViewFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (mWebView != null) {
+            mWebView.destroy();
+        }
         View v = inflater.inflate(R.layout.web_fragment, container, false);
         if (mCurrentURL != null) {
-            WebView wv = (WebView) v.findViewById(R.id.webPage);
-            wv.getSettings().setJavaScriptEnabled(true);
-            wv.setWebViewClient(new MyWebClient());
+            mWebView = (WebView) v.findViewById(R.id.webPage);
+            mWebView.getSettings().setJavaScriptEnabled(true);
+            mWebView.setWebViewClient(new MyWebClient());
             if( !mCurrentURL.contains("<")) {
-                wv.loadUrl(mCurrentURL);
+                mWebView .loadUrl(mCurrentURL);
             } else {
-                wv.loadDataWithBaseURL("", mCurrentURL, WEBVIEW_MIME, WEBVIEW_ENCODING, "");
+                mWebView.loadDataWithBaseURL("", mCurrentURL, WEBVIEW_MIME, WEBVIEW_ENCODING, "");
             }
         }
         return v;
