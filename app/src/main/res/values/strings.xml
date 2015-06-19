@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Censor News Reader</string>
+    <string name="app_name">" Censor News Reader"</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="empty">Nothing to show\nNews list is loading\nPlease wait</string>
@@ -8,6 +8,6 @@
     <string name="menu_exit">"Quit"</string>
     <string name="url_null">"Url is null"</string>
     <string name="dwnld_from_db">"Data downloaded from DB"</string>
-    <string name="dialogTitleAbout">Censor News Reader</string>
-    <string name="dialogMsgAbout">A simple news feed for site censor.net.ua\nby  roma.sck@gmail.com\n</string>
+    <string name="dialogTitleAbout">About app</string>
+    <string name="dialogMsgAbout">A simple news feed for site censor.net.ua\n\nby  roma.sck@gmail.com\n</string>
 </resources>

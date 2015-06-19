@@ -4,5 +4,6 @@
     <color name="base_bg_color">#EBEBEB</color>
     <color name="base_text_color">#4c555e</color>
     <color name="transparent_color">#00000000</color>
+    <color name="actbar_titletext_color">#ff7f50</color>
 
 </resources>
