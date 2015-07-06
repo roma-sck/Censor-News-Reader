@@ -13,5 +13,5 @@
 	When internet is available, all news data ( including html page with detail news description ) 
 	save to database and may loading from there in offline mode.
 
-	![alt tag](https://raw.githubusercontent.com/roma-sck/Censor-News-Reader/master/app/src/main/res/drawable/censornews_screenshots.png)
+![alt tag](https://raw.githubusercontent.com/roma-sck/Censor-News-Reader/master/app/src/main/res/drawable/censornews_screenshots.png)
 
