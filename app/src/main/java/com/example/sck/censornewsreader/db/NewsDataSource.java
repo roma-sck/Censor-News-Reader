@@ -44,8 +44,11 @@ public class NewsDataSource {
             String dafault_image = "android.resource://com.example.sck.censornewsreader/" + R.drawable.img_place;
             for (int i = 0; i < newsList.size(); i++) {
                 String title = newsList.get(i).getTitle().getText();
-                String date = newsList.get(i).getDate().get(0).getText() + " " + newsList.get(i).getDate().get(1).getText();
-                String link = newsList.get(i).getTitle().getHref();
+                String date = newsList.get(i).getDate();
+                StringBuffer sb = new StringBuffer(newsList.get(i).getTitle().getHref());
+                // change link to mobile version
+                sb.insert(7, "m.");
+                String link = sb.toString();
                 String saved_url = urlToString(link);
                 String img_link = newsList.get(i).getImage().getSrc();
 
@@ -73,6 +76,7 @@ public class NewsDataSource {
         cv.put(NewsDBHelper.COLUMN_DEFAULTIMAGE, dafault_image);
         cv.put(NewsDBHelper.COLUMN_IMAGELINK, img_link);
         mDatabase.insert(NewsDBHelper.TABLE_NEWS, null, cv);
+        System.out.println("item add" + title);
     }
 
     /**

@@ -4,7 +4,7 @@ package com.example.sck.censornewsreader.models;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Date {
+public class Detail {
 
     private String href;
     private String text;

@@ -57,7 +57,7 @@ public class NewsListAdapter extends BaseAdapter {
         Collection1 item = mListData.get(position);
 
         news.newsTitle.setText(item.getTitle().getText());
-        news.newsDate.setText(item.getDate().get(0).getText() + " " + item.getDate().get(1).getText());
+        news.newsDate.setText(item.getDate());
 
         if ( item.getImage().getSrc().length() > 1) {
             Picasso.with(mContext).load(item.getImage().getSrc()).into(news.newsImage);

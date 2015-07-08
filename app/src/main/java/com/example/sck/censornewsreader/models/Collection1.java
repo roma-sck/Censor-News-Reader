@@ -1,17 +1,17 @@
 
 package com.example.sck.censornewsreader.models;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class Collection1 implements Serializable {
+public class Collection1 {
 
-    private List<Date> date = new ArrayList<Date>();
-    private Image image;
+    private String date;
     private Title title;
+    private Detail detail;
+    private Image image;
+    private int index;
+    private String url;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
@@ -19,7 +19,7 @@ public class Collection1 implements Serializable {
      * @return
      *     The date
      */
-    public List<Date> getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -28,8 +28,44 @@ public class Collection1 implements Serializable {
      * @param date
      *     The date
      */
-    public void setDate(List<Date> date) {
+    public void setDate(String date) {
         this.date = date;
+    }
+
+    /**
+     * 
+     * @return
+     *     The title
+     */
+    public Title getTitle() {
+        return title;
+    }
+
+    /**
+     * 
+     * @param title
+     *     The title
+     */
+    public void setTitle(Title title) {
+        this.title = title;
+    }
+
+    /**
+     * 
+     * @return
+     *     The detail
+     */
+    public Detail getDetail() {
+        return detail;
+    }
+
+    /**
+     * 
+     * @param detail
+     *     The detail
+     */
+    public void setDetail(Detail detail) {
+        this.detail = detail;
     }
 
     /**
@@ -53,19 +89,37 @@ public class Collection1 implements Serializable {
     /**
      * 
      * @return
-     *     The title
+     *     The index
      */
-    public Title getTitle() {
-        return title;
+    public int getIndex() {
+        return index;
     }
 
     /**
      * 
-     * @param title
-     *     The title
+     * @param index
+     *     The index
      */
-    public void setTitle(Title title) {
-        this.title = title;
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    /**
+     * 
+     * @return
+     *     The url
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * 
+     * @param url
+     *     The url
+     */
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Map<String, Object> getAdditionalProperties() {

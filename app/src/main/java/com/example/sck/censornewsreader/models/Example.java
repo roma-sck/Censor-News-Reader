@@ -12,7 +12,6 @@ public class Example {
     private int version;
     private boolean newdata;
     private String lastrunstatus;
-    private String lastsuccess;
     private String thisversionstatus;
     private String nextrun;
     private String thisversionrun;
@@ -125,24 +124,6 @@ public class Example {
      */
     public void setLastrunstatus(String lastrunstatus) {
         this.lastrunstatus = lastrunstatus;
-    }
-
-    /**
-     * 
-     * @return
-     *     The lastsuccess
-     */
-    public String getLastsuccess() {
-        return lastsuccess;
-    }
-
-    /**
-     * 
-     * @param lastsuccess
-     *     The lastsuccess
-     */
-    public void setLastsuccess(String lastsuccess) {
-        this.lastsuccess = lastsuccess;
     }
 
     /**

@@ -109,7 +109,10 @@ public class NewsListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int pos, long id) {
         String selectedNewsLink;
         if (mNewsList != null) {
-            selectedNewsLink = mNewsList.get(pos).getTitle().getHref();
+            StringBuffer sb = new StringBuffer(mNewsList.get(pos).getTitle().getHref());
+            // change link to mobile version
+            sb.insert(7, "m.");
+            selectedNewsLink = sb.toString();
         } else {
             // get saved_url of selected news from db
             Cursor cursor = (Cursor) l.getItemAtPosition(pos);
