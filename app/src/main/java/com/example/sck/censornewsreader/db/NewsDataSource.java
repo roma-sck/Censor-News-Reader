@@ -76,7 +76,6 @@ public class NewsDataSource {
         cv.put(NewsDBHelper.COLUMN_DEFAULTIMAGE, dafault_image);
         cv.put(NewsDBHelper.COLUMN_IMAGELINK, img_link);
         mDatabase.insert(NewsDBHelper.TABLE_NEWS, null, cv);
-        System.out.println("item add" + title);
     }
 
     /**
