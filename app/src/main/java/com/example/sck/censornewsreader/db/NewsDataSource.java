@@ -42,12 +42,14 @@ public class NewsDataSource {
 
         if(newsList != null) {
             String dafault_image = "android.resource://com.example.sck.censornewsreader/" + R.drawable.img_place;
+            String link_prefix = "m.";
+
             for (int i = 0; i < newsList.size(); i++) {
                 String title = newsList.get(i).getTitle().getText();
                 String date = newsList.get(i).getDate();
-                StringBuffer sb = new StringBuffer(newsList.get(i).getTitle().getHref());
+                StringBuilder sb = new StringBuilder(newsList.get(i).getTitle().getHref());
                 // change link to mobile version
-                sb.insert(7, "m.");
+                sb.insert(7, link_prefix);
                 String link = sb.toString();
                 String saved_url = urlToString(link);
                 String img_link = newsList.get(i).getImage().getSrc();

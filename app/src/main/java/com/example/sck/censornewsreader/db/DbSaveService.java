@@ -9,9 +9,8 @@ import java.util.List;
 
 public class DbSaveService extends IntentService {
 
-    private static String TAG = "DbSaveService";
+    private static final String TAG = "DbSaveService";
     private static List<Collection1> mNewsList;
-    private NewsDataSource mDatasource;
     /**
      * A constructor is required, and must call the super IntentService(String)
      * constructor with a name for the worker thread.
@@ -30,9 +29,9 @@ public class DbSaveService extends IntentService {
      */
     @Override
     protected void onHandleIntent(Intent intent) {
-        mDatasource = new NewsDataSource(getBaseContext());
-        mDatasource.open();
-        mDatasource.addNewsToDB(mNewsList);
-        mDatasource.close();
+        NewsDataSource dataSource = new NewsDataSource(getBaseContext());
+        dataSource.open();
+        dataSource.addNewsToDB(mNewsList);
+        dataSource.close();
     }
 }

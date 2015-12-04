@@ -74,7 +74,7 @@ public class NewsListFragment extends ListFragment {
     /**
      * update mNewsList, save updated news to DB
      *
-     * @param allnews
+     * @param allnews allnews model
      */
     public void onEvent(Example allnews) {
         mPullToRefreshView.setRefreshing(false);
@@ -109,7 +109,7 @@ public class NewsListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int pos, long id) {
         String selectedNewsLink;
         if (mNewsList != null) {
-            StringBuffer sb = new StringBuffer(mNewsList.get(pos).getTitle().getHref());
+            StringBuilder sb = new StringBuilder(mNewsList.get(pos).getTitle().getHref());
             // change link to mobile version
             sb.insert(7, "m.");
             selectedNewsLink = sb.toString();

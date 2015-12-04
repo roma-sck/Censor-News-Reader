@@ -12,8 +12,6 @@ import com.example.sck.censornewsreader.fragments.WebViewFragment;
 
 public class DetailsNewsActivity extends Activity {
 
-    private WebViewFragment wvf;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +20,8 @@ public class DetailsNewsActivity extends Activity {
         // get url selected news from NewsListFragment
         Bundle bundle = this.getIntent().getExtras();
         String url = bundle.getString("url");
+
+        WebViewFragment wvf;
 
         if(url != null) {
             wvf = new WebViewFragment();
