@@ -3,7 +3,7 @@ package com.example.sck.censornewsreader.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,12 +44,16 @@ public class MainActivity extends Activity {
     }
 
     private void createSendMailIntent() {
-        Intent mailIntent = new Intent(Intent.ACTION_SEND);
-        mailIntent.setType("message/rfc822");
-        mailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] { "roma.sck@gmail.com" });
-        mailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Censor News Reader report: ");
-        mailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "\n I like your app.");
-        startActivity(Intent.createChooser(mailIntent, "Send via:"));
+        final String mailto = "mailto";
+        final String my_mail = "roma.sck@gmail.com";
+        final String email_subject = "Censor News Reader report: ";
+        final String email_text = "\n I like your app.";
+        final String email_dialog_header = "Send email...";
+
+        Intent mailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(mailto, my_mail, null));
+        mailIntent.putExtra(Intent.EXTRA_SUBJECT, email_subject);
+        mailIntent.putExtra(Intent.EXTRA_TEXT, email_text);
+        startActivity(Intent.createChooser(mailIntent, email_dialog_header));
     }
 
     private void createAboutDialog() {
