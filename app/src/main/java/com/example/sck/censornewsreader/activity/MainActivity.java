@@ -44,16 +44,11 @@ public class MainActivity extends Activity {
     }
 
     private void createSendMailIntent() {
-        final String mailto = "mailto";
-        final String my_mail = "roma.sck@gmail.com";
-        final String email_subject = "Censor News Reader report: ";
-        final String email_text = "\n I like your app.";
-        final String email_dialog_header = "Send email...";
-
-        Intent mailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(mailto, my_mail, null));
-        mailIntent.putExtra(Intent.EXTRA_SUBJECT, email_subject);
-        mailIntent.putExtra(Intent.EXTRA_TEXT, email_text);
-        startActivity(Intent.createChooser(mailIntent, email_dialog_header));
+        Intent mailIntent = new Intent(Intent.ACTION_SENDTO,
+                Uri.fromParts(getString(R.string.mailto), getString(R.string.my_mail), null));
+        mailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
+        mailIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.email_text));
+        startActivity(Intent.createChooser(mailIntent, getString(R.string.email_dialog_header)));
     }
 
     private void createAboutDialog() {
