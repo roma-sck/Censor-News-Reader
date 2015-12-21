@@ -21,15 +21,12 @@ public class DetailsNewsActivity extends Activity {
         Bundle bundle = this.getIntent().getExtras();
         String url = bundle.getString("url");
 
-        WebViewFragment wvf;
-
         if(url != null) {
-            wvf = new WebViewFragment();
-            wvf.init(url);
+            WebViewFragment webFragment = WebViewFragment.newInstance(url);
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(android.R.id.content, wvf, url);
+            fragmentTransaction.add(android.R.id.content, webFragment, url);
             fragmentTransaction.commit();
         } else {
             Toast.makeText(App.getContext(), R.string.url_null, Toast.LENGTH_LONG).show();

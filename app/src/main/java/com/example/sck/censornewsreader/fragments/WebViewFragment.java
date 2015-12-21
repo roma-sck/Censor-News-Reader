@@ -13,17 +13,20 @@ import com.example.sck.censornewsreader.R;
 public class WebViewFragment extends Fragment {
 
     private WebView mWebView;
-    private String mCurrentURL;
+    private static String mCurrentURL;
     private static final String WEBVIEW_MIME = "text/html";
     private static final String WEBVIEW_ENCODING = "UTF-8";
 
     /**
-     * get url from DetailsNewsActivity
+     * Static factory method that takes an String parameter from DetailsNewsActivity,
+     * and returns the new fragment to the client.
      *
      * @param url Selected news link
      */
-    public void init(String url) {
+    public static WebViewFragment newInstance(String url) {
+        WebViewFragment f = new WebViewFragment();
         mCurrentURL = url;
+        return f;
     }
 
     @Override
