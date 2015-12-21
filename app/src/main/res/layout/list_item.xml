@@ -8,10 +8,14 @@
 
     <TextView
         android:id="@+id/newsTitle"
+        android:layout_marginLeft="@dimen/list_text_marginLeft"
+        android:paddingTop="@dimen/list_text_paddingTop"
         style="@style/ListTitleText"/>
 
     <TextView
         android:id="@+id/newsDate"
+        android:layout_marginLeft="@dimen/list_text_marginLeft"
+        android:paddingTop="@dimen/list_text_paddingTop"
         style="@style/ListDateText"/>
 
 </RelativeLayout>
