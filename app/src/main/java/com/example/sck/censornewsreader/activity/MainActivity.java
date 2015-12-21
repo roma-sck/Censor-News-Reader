@@ -2,6 +2,8 @@ package com.example.sck.censornewsreader.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +12,8 @@ import android.view.MenuItem;
 
 import com.example.sck.censornewsreader.R;
 import com.example.sck.censornewsreader.api.ApiRequest;
+import com.example.sck.censornewsreader.fragments.NewsListFragment;
+import com.example.sck.censornewsreader.fragments.WebViewFragment;
 
 public class MainActivity extends Activity {
 
@@ -18,7 +22,17 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        addNewsListFragment();
+
         ApiRequest.updateNews();
+    }
+
+    private void addNewsListFragment() {
+        NewsListFragment newsListFragment = new NewsListFragment();
+
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.newslist_fragment, newsListFragment);
+        fragmentTransaction.commit();
     }
 
     @Override

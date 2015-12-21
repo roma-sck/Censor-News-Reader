@@ -13,19 +13,20 @@ import com.example.sck.censornewsreader.R;
 public class WebViewFragment extends Fragment {
 
     private WebView mWebView;
-    private static String mCurrentURL;
+    private static String sCurrentURL;
     private static final String WEBVIEW_MIME = "text/html";
     private static final String WEBVIEW_ENCODING = "UTF-8";
 
     /**
-     * Static factory method that takes an String parameter from DetailsNewsActivity,
-     * and returns the new fragment to the client.
+     * Static factory method that takes an String parameter from DetailsNewsActivity
+     *
+     * @return returns the new fragment to the client.
      *
      * @param url Selected news link
      */
     public static WebViewFragment newInstance(String url) {
         WebViewFragment f = new WebViewFragment();
-        mCurrentURL = url;
+        sCurrentURL = url;
         return f;
     }
 
@@ -35,14 +36,14 @@ public class WebViewFragment extends Fragment {
             mWebView.destroy();
         }
         View v = inflater.inflate(R.layout.web_fragment, container, false);
-        if (mCurrentURL != null) {
+        if (sCurrentURL != null) {
             mWebView = (WebView) v.findViewById(R.id.webPage);
             mWebView.getSettings().setJavaScriptEnabled(true);
             mWebView.setWebViewClient(new MyWebClient());
-            if( !mCurrentURL.contains("<")) {
-                mWebView .loadUrl(mCurrentURL);
+            if( !sCurrentURL.contains("<")) {
+                mWebView .loadUrl(sCurrentURL);
             } else {
-                mWebView.loadDataWithBaseURL("", mCurrentURL, WEBVIEW_MIME, WEBVIEW_ENCODING, "");
+                mWebView.loadDataWithBaseURL("", sCurrentURL, WEBVIEW_MIME, WEBVIEW_ENCODING, "");
             }
         }
         return v;

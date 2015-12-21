@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainLayout"
     style="@style/LinearLayout">
 
-    <fragment
-        android:name="com.example.sck.censornewsreader.fragments.NewsListFragment"
+    <LinearLayout
         android:id="@+id/newslist_fragment"
-        tools:layout="@layout/listnews_fragment"
         style="@style/Fragment"/>
 
 </LinearLayout>

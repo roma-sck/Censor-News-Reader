@@ -26,7 +26,7 @@ public class DetailsNewsActivity extends Activity {
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(android.R.id.content, webFragment, url);
+            fragmentTransaction.add(android.R.id.content, webFragment);
             fragmentTransaction.commit();
         } else {
             Toast.makeText(App.getContext(), R.string.url_null, Toast.LENGTH_LONG).show();
