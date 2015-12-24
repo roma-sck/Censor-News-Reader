@@ -1,6 +1,7 @@
 package com.example.sck.censornewsreader.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +19,16 @@ public class NewsListAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<Collection1> mListData;
-    private LayoutInflater inflater;
+    private LayoutInflater mInflater;
+    private Typeface mNewsDateTypeface;
+    private Typeface mNewsTitleTypeface;
 
     public NewsListAdapter(Context context, List<Collection1> mListData) {
         this.mListData = mListData;
-        inflater = LayoutInflater.from(context);
+        mInflater = LayoutInflater.from(context);
         mContext = context;
+        this.mNewsDateTypeface = Typeface.MONOSPACE;
+        this.mNewsTitleTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Medium.ttf");
     }
 
     @Override
@@ -44,7 +49,7 @@ public class NewsListAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup parent) {
         NewsItem news;
         if (view == null) {
-            view = inflater.inflate(R.layout.list_item, null);
+            view = mInflater.inflate(R.layout.list_item, null);
             news = new NewsItem();
             news.newsTitle = (TextView) view.findViewById(R.id.newsTitle);
             news.newsDate = (TextView) view.findViewById(R.id.newsDate);
@@ -55,6 +60,9 @@ public class NewsListAdapter extends BaseAdapter {
         }
 
         Collection1 item = mListData.get(position);
+
+        news.newsDate.setTypeface(mNewsDateTypeface);
+        news.newsTitle.setTypeface(mNewsTitleTypeface);
 
         news.newsTitle.setText(item.getTitle().getText());
         news.newsDate.setText(item.getDate());
