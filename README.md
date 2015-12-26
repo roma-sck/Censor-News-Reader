@@ -7,6 +7,7 @@ There is two screens
 2) detailed info news (webView)
 
 Requests done with the help of library Retrofit
+
 Callbacks take over Eventbus
 
 Both screens implemented through a bunch Activity->Fragment
