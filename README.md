@@ -1,5 +1,5 @@
 # Censor-News-Reader
-	A news feed for http://censor.net.ua/    ( json api)
+	A news feed for [censor.net.ua](http://censor.net.ua/news/)    (json api) [api](https://www.kimonolabs.com/api/8b10y57e?apikey=Iuwy0Jm59LuqQiWRMf8dox6bFRKkcwA9)
 
 	There is two screens
 	1) a list of news (with pull-to-refresh)
@@ -10,8 +10,8 @@
 
 	Both screens implemented through a bunch Activity->Fragment
 
-	When internet is available, all news data ( including html page with detail news description ) 
-	save to database and may loading from there in offline mode.
+	All news data ( including html page with detail news description ) 
+	save to SQLite database and may loading from there in offline mode.
 
 ![alt tag](https://raw.githubusercontent.com/roma-sck/Censor-News-Reader/master/app/src/main/res/drawable/censornews_screenshots.png)
 
