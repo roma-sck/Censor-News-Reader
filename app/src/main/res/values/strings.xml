@@ -17,6 +17,6 @@
     <string name="my_mail">roma.sck@gmail.com</string>
     <string name="email_subject">Censor News Reader report: </string>
     <string name="email_text">"\n I like your app."</string>
-    <string name="email_dialog_header">Send email...</string>
+    <string name="email_dialog_header">Send email</string>
 
 </resources>

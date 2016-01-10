@@ -35,14 +35,19 @@ public class WebViewFragment extends Fragment {
         if (mWebView != null) {
             mWebView.destroy();
         }
+
         View v = inflater.inflate(R.layout.web_fragment, container, false);
+
         if (sCurrentURL != null) {
             mWebView = (WebView) v.findViewById(R.id.webPage);
             mWebView.getSettings().setJavaScriptEnabled(true);
             mWebView.setWebViewClient(new MyWebClient());
+
             if( !sCurrentURL.contains("<")) {
+                // load from web
                 mWebView .loadUrl(sCurrentURL);
             } else {
+                // load from database
                 mWebView.loadDataWithBaseURL("", sCurrentURL, WEBVIEW_MIME, WEBVIEW_ENCODING, "");
             }
         }
