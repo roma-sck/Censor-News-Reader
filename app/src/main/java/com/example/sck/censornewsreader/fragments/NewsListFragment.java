@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
@@ -33,12 +34,15 @@ public class NewsListFragment extends ListFragment {
     private NewsDataSource mDatasource;
     private List<Collection1> mNewsList;
     private ListView mNewsListView;
+    private LinearLayout mProgressBar;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         EventBus.getDefault().register(this);
+
+        mProgressBar.setVisibility(View.VISIBLE);
 
         ititPullToRefresh();
 
@@ -50,6 +54,7 @@ public class NewsListFragment extends ListFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.listnews_fragment, container, false);
         mNewsListView = (ListView) view.findViewById(android.R.id.list);
+        mProgressBar = (LinearLayout) view.findViewById(R.id.progressBar);
         return view;
     }
 
@@ -80,6 +85,9 @@ public class NewsListFragment extends ListFragment {
         mPullToRefreshView.setRefreshing(false);
         mNewsList = allnews.getResults().getCollection1();
         mNewsListView.setAdapter(new NewsListAdapter(getActivity(), mNewsList));
+
+        mProgressBar.setVisibility(View.GONE);
+
         // news saving process in IntentService
         DbSaveService.setNewsList(mNewsList);
         getActivity().startService(new Intent(getActivity(), DbSaveService.class));
@@ -91,6 +99,7 @@ public class NewsListFragment extends ListFragment {
      * @param msg Retrofit error message
      */
     public void onEvent(String msg) {
+        mProgressBar.setVisibility(View.GONE);
         mPullToRefreshView.setRefreshing(false);
         Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
 

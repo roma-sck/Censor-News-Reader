@@ -3,6 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/LinearLayout">
 
+    <LinearLayout
+        android:id="@+id/progressBar"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:id="@+id/pb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </ProgressBar>
+    </LinearLayout>
+
     <TextView
         android:id="@id/android:empty"
         android:layout_width="wrap_content"
