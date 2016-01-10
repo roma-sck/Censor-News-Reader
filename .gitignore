@@ -3,5 +3,6 @@
 /.idea/
 /.idea/workspace.xml
 /.idea/libraries
+/.navigation/
 .DS_Store
 /build
