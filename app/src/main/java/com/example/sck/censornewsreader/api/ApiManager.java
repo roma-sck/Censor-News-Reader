@@ -29,17 +29,25 @@ public class ApiManager {
         return CENSOR_NET_SERVICE;
     }
 
+    /**
+     * temporally java.security error solution:
+     * java.security.cert.CertPathValidatorException: Trust anchor for certification path not found.
+     *
+     * @return unsafe OkHttpClient
+     */
     private static OkHttpClient getUnsafeOkHttpClient() {
         try {
             // Create a trust manager that does not validate certificate chains
             final TrustManager[] trustAllCerts = new TrustManager[] {
                     new X509TrustManager() {
                         @Override
-                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain,
+                                                       String authType) throws CertificateException {
                         }
 
                         @Override
-                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain,
+                                                       String authType) throws CertificateException {
                         }
 
                         @Override
