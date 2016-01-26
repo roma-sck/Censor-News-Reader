@@ -2,6 +2,7 @@ package com.example.sck.censornewsreader.fragments;
 
 import android.app.ListFragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import com.example.sck.censornewsreader.activity.MainActivity;
 import com.example.sck.censornewsreader.db.DbSaveService;
 import com.example.sck.censornewsreader.api.ApiRequest;
 import com.example.sck.censornewsreader.activity.DetailsNewsActivity;
@@ -88,9 +90,17 @@ public class NewsListFragment extends ListFragment {
 
         mProgressBar.setVisibility(View.GONE);
 
-        // news saving process in IntentService
-        DbSaveService.setNewsList(mNewsList);
-        getActivity().startService(new Intent(getActivity(), DbSaveService.class));
+        if(getFlagValueFromSP(MainActivity.SPREFS_NAME)) {
+            // news saving process in IntentService
+            DbSaveService.setNewsList(mNewsList);
+            getActivity().startService(new Intent(getActivity(), DbSaveService.class));
+        }
+    }
+
+    private boolean getFlagValueFromSP(String key) {
+        SharedPreferences preferences = getActivity().getApplicationContext()
+                .getSharedPreferences(MainActivity.SPREFS_NAME, android.content.Context.MODE_PRIVATE);
+        return preferences.getBoolean(key, false);
     }
 
     /**
