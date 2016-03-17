@@ -1,5 +1,7 @@
 # Censor-News-Reader
 
+!!!!!!! not works (Kimono shut down on February 29th, 2016 and the cloud service has been discontinued.) [link](https://www.kimonolabs.com/)
+
 A news feed for [censor.net.ua](http://censor.net.ua/news/)    (json api) [api](https://www.kimonolabs.com/api/8b10y57e?apikey=Iuwy0Jm59LuqQiWRMf8dox6bFRKkcwA9)
 
 There is two screens
