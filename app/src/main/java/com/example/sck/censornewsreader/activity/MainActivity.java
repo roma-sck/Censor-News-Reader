@@ -76,7 +76,11 @@ public class MainActivity extends Activity {
                 Uri.fromParts(getString(R.string.mailto), getString(R.string.my_mail), null));
         mailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
         mailIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.email_text));
-        startActivity(Intent.createChooser(mailIntent, getString(R.string.email_dialog_header)));
+
+        // Verify the intent will resolve to at least one activity
+        if (mailIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(Intent.createChooser(mailIntent, getString(R.string.email_dialog_header)));
+        }
     }
 
     private void createAboutDialog() {
